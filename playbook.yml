@@ -1,0 +1,20 @@
+
+---
+- name: Addition POC
+  hosts: localhost
+  connection: local
+  gather_facts: false
+
+  tasks:
+    - name: Execute Python addition script
+      command:
+        argv:
+          - python3
+          - "{{ playbook_dir }}/add_numbers.py"
+          - "{{ input_num1 | string }}"
+          - "{{ input_num2 | string }}"
+      register: result
+
+    - name: Display Addition Result
+      debug:
+        msg: "Addition Result: {{ result.stdout }}"
