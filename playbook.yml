@@ -15,7 +15,14 @@
           - "{{ input_num2 | string }}"
       register: result
  
-    - name: Return JSON
-      debug:
-        msg: "{{ result.stdout }}"
+    - name: Build ServiceNow response
+      set_fact:
+        snow_response:
+          status: SUCCESS
+          input_num1: "{{ input_num1 | int }}"
+          input_num2: "{{ input_num2 | int }}"
+          result: "{{ result.stdout | int }}"
  
+    - name: Return ServiceNow response
+      debug:
+        var: snow_response
