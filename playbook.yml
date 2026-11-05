@@ -1,11 +1,11 @@
-
 ---
 - name: Addition POC
   hosts: localhost
   connection: local
   gather_facts: false
-
+ 
   tasks:
+ 
     - name: Execute Python addition script
       command:
         argv:
@@ -14,7 +14,8 @@
           - "{{ input_num1 | string }}"
           - "{{ input_num2 | string }}"
       register: result
-
-    - name: Display Addition Result
+ 
+    - name: Return JSON
       debug:
-        msg: "Addition Result: {{ result.stdout }}"
+        msg: "{{ result.stdout }}"
+ 
