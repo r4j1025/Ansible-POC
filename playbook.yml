@@ -15,14 +15,10 @@
           - "{{ input_num2 | string }}"
       register: result
  
-    - name: Build ServiceNow response
-      set_fact:
-        snow_response:
+    - name: Publish structured output
+      set_stats:
+        data:
           status: SUCCESS
           input_num1: "{{ input_num1 | int }}"
           input_num2: "{{ input_num2 | int }}"
           result: "{{ result.stdout | int }}"
- 
-    - name: Return ServiceNow response
-      debug:
-        var: snow_response
